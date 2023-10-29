@@ -1,0 +1,154 @@
+using System;
+
+// Клас Address
+class Address
+{
+    public string Index { get; set; }
+    public string Country { get; set; }
+    public string City { get; set; }
+    public string Street { get; set; }
+    public string House { get; set; }
+    public string Apartment { get; set; }
+}
+
+// Клас Converter
+class Converter
+{
+    private double usdRate;
+    private double eurRate;
+    private double plnRate;
+
+    public Converter(double usd, double eur, double pln)
+    {
+        usdRate = usd;
+        eurRate = eur;
+        plnRate = pln;
+    }
+
+    public double ConvertToUSD(double amountInUah)
+    {
+        return amountInUah / usdRate;
+    }
+
+    public double ConvertToEUR(double amountInUah)
+    {
+        return amountInUah / eurRate;
+    }
+
+    public double ConvertToPLN(double amountInUah)
+    {
+        return amountInUah / plnRate;
+    }
+
+    public double ConvertFromUSD(double amountInUSD)
+    {
+        return amountInUSD * usdRate;
+    }
+
+    public double ConvertFromEUR(double amountInEUR)
+    {
+        return amountInEUR * eurRate;
+    }
+
+    public double ConvertFromPLN(double amountInPLN)
+    {
+        return amountInPLN * plnRate;
+    }
+}
+
+// Клас Employee
+class Employee
+{
+    public string LastName { get; }
+    public string FirstName { get; }
+    public string Position { get; }
+    public int Experience { get; }
+
+    public Employee(string lastName, string firstName)
+    {
+        LastName = lastName;
+        FirstName = firstName;
+    }
+
+    public void CalculateSalaryAndTax()
+    {
+        // Логіка розрахунку окладу та податкового збору.
+        // В даному прикладі використано фіксовані значення.
+        double salary = 5000; // Оклад
+        double tax = salary * 0.2; // Податковий збір
+
+        Console.WriteLine($"Прізвище: {LastName}");
+        Console.WriteLine($"Ім'я: {FirstName}");
+        Console.WriteLine($"Посада: {Position}");
+        Console.WriteLine($"Оклад: {salary}");
+        Console.WriteLine($"Податковий збір: {tax}");
+    }
+}
+
+// Клас User
+class User
+{
+    public string Login { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public int Age { get; set; }
+    public DateTime RegistrationDate { get; }
+
+    public User(string login, string firstName, string lastName, int age)
+    {
+        Login = login;
+        FirstName = firstName;
+        LastName = lastName;
+        Age = age;
+        RegistrationDate = DateTime.Now;
+    }
+
+    public void DisplayUserInfo()
+    {
+        Console.WriteLine($"Логін: {Login}");
+        Console.WriteLine($"Ім'я: {FirstName}");
+        Console.WriteLine($"Прізвище: {LastName}");
+        Console.WriteLine($"Вік: {Age}");
+        Console.WriteLine($"Дата реєстрації: {RegistrationDate}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Приклад використання класів
+        Address address = new Address
+        {
+            Index = "12345",
+            Country = "Україна",
+            City = "Київ",
+            Street = "Вулиця Київська",
+            House = "1",
+            Apartment = "10"
+        };
+
+        Console.WriteLine("Адреса:");
+        Console.WriteLine($"Індекс: {address.Index}");
+        Console.WriteLine($"Країна: {address.Country}");
+        Console.WriteLine($"Місто: {address.City}");
+        Console.WriteLine($"Вулиця: {address.Street}");
+        Console.WriteLine($"Будинок: {address.House}");
+        Console.WriteLine($"Квартира: {address.Apartment}");
+
+        Converter converter = new Converter(28.0, 33.0, 7.0);
+        double amountInUah = 1000.0;
+
+        Console.WriteLine($"1000 UAH в USD: {converter.ConvertToUSD(amountInUah)}");
+        Console.WriteLine($"1000 UAH в EUR: {converter.ConvertToEUR(amountInUah)}");
+        Console.WriteLine($"1000 UAH в PLN: {converter.ConvertToPLN(amountInUah)}");
+
+        Employee employee = new Employee("Петров", "Іван");
+        employee.Position = "Менеджер";
+        employee.Experience = 5;
+        employee.CalculateSalaryAndTax();
+
+        User user = new User("user123", "Іван", "Петров", 30);
+        user.DisplayUserInfo();
+    }
+}
